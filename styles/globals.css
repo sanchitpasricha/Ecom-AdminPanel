@@ -25,3 +25,18 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+input,
+textarea {
+  @apply border border-gray-400 rounded-md p-2 w-full;
+  @apply mb-2;
+}
+
+input:focus,
+textarea:focus {
+  @apply border-blue-900;
+}
+
+h1 {
+  @apply text-blue-900 mb-2 text-lg;
+}
