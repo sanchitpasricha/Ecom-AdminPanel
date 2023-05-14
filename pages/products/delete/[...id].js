@@ -7,6 +7,7 @@ export default function DeleteProductPage() {
   const router = useRouter();
   const [productInfo, setProductInfo] = useState();
   const { id } = router.query;
+
   useEffect(() => {
     if (!id) {
       return;
@@ -15,14 +16,29 @@ export default function DeleteProductPage() {
       setProductInfo(res.data);
     });
   }, [id]);
+
   function goBack() {
     router.push("/products");
   }
+
+  async function deleteProduct() {
+    await axios.delete("/api/products?id=" + id);
+    goBack();
+  }
+
   return (
     <Layout>
-      <h1>Do you really want to delete {productInfo?.title}?</h1>
-      <button>Yes</button>
-      <button onclick={goBack}>No</button>
+      <h1 className="text-center">
+        Do you really want to delete {productInfo?.title}?
+      </h1>
+      <div className="flex gap-2 justify-center">
+        <button className="btn-red" onClick={deleteProduct}>
+          Yes
+        </button>
+        <button className="btn-default" onClick={goBack}>
+          No
+        </button>
+      </div>
     </Layout>
   );
 }
